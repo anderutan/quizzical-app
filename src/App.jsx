@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import StartPage from './StartPage';
-import QuizPage from './QuizPage';
+import Quiz from './Quiz';
 import blobsLeft from './assets/blobs-bottom-left.png';
 import blobsRight from './assets/blobs-top-right.png';
 import './App.css';
@@ -8,24 +8,56 @@ import './App.css';
 function App() {
   const [startQuiz, setStartQuiz] = useState(false);
 
-  const [quizQuestion, setQuizQuestion] = useState([]);
+  const [oriQuizQuestion, setOriQuizQuestion] = useState([]);
 
   useEffect(() => {
     fetch('https://opentdb.com/api.php?amount=5&type=multiple')
       .then((res) => res.json())
-      .then((data) => setQuizQuestion(data.results));
+      .then((data) => setOriQuizQuestion(data.results));
   }, [startQuiz]);
 
   function startQuizClick() {
     setStartQuiz(!startQuiz);
   }
 
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  function prepareQuizQuestion() {
+    const preparedQuestions = oriQuizQuestion.map((questionObj) => {
+      const { question, correct_answer, incorrect_answers } = questionObj;
+      const shuffledAnswers = shuffleArray([
+        ...incorrect_answers,
+        correct_answer,
+      ]);
+      return {
+        question,
+        correct_answer,
+        shuffledAnswers,
+      };
+    });
+    return preparedQuestions;
+  }
+
+  const quizQuestions = prepareQuizQuestion();
+  console.log(quizQuestions);
+  // const quizElement = .map(quiz => (
+  //   <Quiz
+
+  //   />
+  //   ))
+
   return (
     <main>
       <img src={blobsLeft} alt='' className='blobs-l' />
       <img src={blobsRight} alt='' className='blobs-r' />
       {!startQuiz && <StartPage startQuizClick={startQuizClick} />}
-      {startQuiz && <QuizPage />}
+      {startQuiz && { quizElement }}
     </main>
   );
 }
