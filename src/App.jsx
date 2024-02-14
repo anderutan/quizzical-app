@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import StartPage from './StartPage';
 import Quiz from './Quiz';
 import blobsLeft from './assets/blobs-bottom-left.png';
@@ -43,6 +43,8 @@ function App() {
   }
 
   const quizQuestions = oriQuizQuestion.length > 0 ? prepareQuizQuestion() : [];
+
+  console.log(quizQuestions);
 
   return (
     <main>

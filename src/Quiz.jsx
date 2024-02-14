@@ -1,3 +1,5 @@
+import { decode } from 'html-entities';
+
 export default function Quiz(props) {
   function handleSubmit(e) {
     e.preventDefault();
@@ -9,7 +11,7 @@ export default function Quiz(props) {
 
   function qnaList() {
     const qna = props.quizQuestions.map((quiz, index) => {
-      const question = quiz.question;
+      const question = decode(quiz.question);
       const options = quiz.shuffledAnswers.map((option, optionIndex) => (
         <label key={optionIndex}>
           <input
@@ -24,7 +26,7 @@ export default function Quiz(props) {
       return (
         <div key={index}>
           <h2>{question}</h2>
-          {options}
+          {decode(options)}
           <hr />
         </div>
       );
