@@ -4,15 +4,26 @@ import { useState } from 'react';
 export default function Quiz(props) {
   const [selectedAnswers, setSelectedAnswers] = useState({});
 
-  console.log(selectedAnswers);
+  const [submitStatus, setSubmitStatus] = useState(false);
+
+  const [correctNum, setCorrectNum] = useState(0);
 
   function handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
-    console.log(formJson);
-    console.log('Selected answers: ', selectedAnswers);
+
+    let numCorrect = 0;
+    for (const [qIndex, selectedAnswer] of Object.entries(formJson)) {
+      const correctAnswer = props.quizQuestions[qIndex].correct_answer;
+      if (selectedAnswer === correctAnswer) {
+        numCorrect++;
+      }
+    }
+
+    setSubmitStatus(true);
+    setCorrectNum(numCorrect);
   }
 
   function qnaList() {
@@ -40,7 +51,7 @@ export default function Quiz(props) {
               }
             }}
           />
-          {option}
+          {decode(option)}
         </label>
       ));
       return (
@@ -56,9 +67,12 @@ export default function Quiz(props) {
   return (
     <form method='post' onSubmit={handleSubmit} className='form'>
       {qnaList()}
-      <button type='submit' className='submit-btn'>
-        Submit button
-      </button>
+      <div className='result-btn'>
+        {submitStatus && <p>You scored {correctNum}/5 correct answers</p>}
+        <button type='submit' className='submit-btn'>
+          Submit button
+        </button>
+      </div>
     </form>
   );
 }
