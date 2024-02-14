@@ -118,11 +118,11 @@ button {
   gap: 1em;
 }
 
-input[type='radio'] {
+/* input[type='radio'] {
   display: none;
-}
+} */
 
-label {
+label.radio-btn {
   display: inline-block;
   padding: 5px 25px;
   border: 1px solid #4d5b9e;
@@ -130,10 +130,14 @@ label {
   cursor: pointer;
 }
 
-label:hover,
-input[type='radio']:checked + label {
+label:hover {
   background-color: #d6dbf5;
   border: none;
+}
+
+input[type='radio']:checked + label.radio-btn {
+  background-color: #4d5b9e;
+  color: white;
 }
 
 .qna-line {
