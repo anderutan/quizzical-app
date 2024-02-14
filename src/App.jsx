@@ -10,14 +10,11 @@ function App() {
 
   const [oriQuizQuestion, setOriQuizQuestion] = useState([]);
 
-  useEffect(() => {
+  function startQuizClick() {
+    setStartQuiz(!startQuiz);
     fetch('https://opentdb.com/api.php?amount=5&type=multiple')
       .then((res) => res.json())
       .then((data) => setOriQuizQuestion(data.results));
-  }, [startQuiz]);
-
-  function startQuizClick() {
-    setStartQuiz(!startQuiz);
   }
 
   function shuffleArray(array) {
@@ -31,6 +28,7 @@ function App() {
   function prepareQuizQuestion() {
     const preparedQuestions = oriQuizQuestion.map((questionObj) => {
       const { question, correct_answer, incorrect_answers } = questionObj;
+
       const shuffledAnswers = shuffleArray([
         ...incorrect_answers,
         correct_answer,
@@ -44,7 +42,7 @@ function App() {
     return preparedQuestions;
   }
 
-  const quizQuestions = prepareQuizQuestion();
+  const quizQuestions = oriQuizQuestion.length > 0 ? prepareQuizQuestion() : [];
 
   return (
     <main>
