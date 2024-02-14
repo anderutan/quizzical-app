@@ -13,7 +13,7 @@ export default function Quiz(props) {
     const qna = props.quizQuestions.map((quiz, index) => {
       const question = decode(quiz.question);
       const options = quiz.shuffledAnswers.map((option, optionIndex) => (
-        <label key={optionIndex}>
+        <label key={optionIndex} className='qna-answer'>
           <input
             type='radio'
             name={`option${index}`}
@@ -24,19 +24,21 @@ export default function Quiz(props) {
         </label>
       ));
       return (
-        <div key={index}>
-          <h2>{question}</h2>
-          {decode(options)}
-          <hr />
+        <div key={index} className='qna-div'>
+          <h2 className='qna-question'>{question}</h2>
+          <div className='qna-answer'>{decode(options)}</div>
+          <hr className='qna-line' />
         </div>
       );
     });
     return qna;
   }
   return (
-    <form method='post' onSubmit={handleSubmit}>
+    <form method='post' onSubmit={handleSubmit} className='form'>
       {qnaList()}
-      <button type='submit'>Submit button</button>
+      <button type='submit' className='submit-btn'>
+        Submit button
+      </button>
     </form>
   );
 }
