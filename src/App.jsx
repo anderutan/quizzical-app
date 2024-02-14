@@ -45,19 +45,13 @@ function App() {
   }
 
   const quizQuestions = prepareQuizQuestion();
-  console.log(quizQuestions);
-  // const quizElement = .map(quiz => (
-  //   <Quiz
-
-  //   />
-  //   ))
 
   return (
     <main>
       <img src={blobsLeft} alt='' className='blobs-l' />
       <img src={blobsRight} alt='' className='blobs-r' />
       {!startQuiz && <StartPage startQuizClick={startQuizClick} />}
-      {startQuiz && { quizElement }}
+      {startQuiz && <Quiz quizQuestions={quizQuestions} />}
     </main>
   );
 }
