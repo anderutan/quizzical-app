@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import StartPage from './StartPage';
+import QuizPage from './QuizPage';
 import blobsLeft from './assets/blobs-bottom-left.png';
 import blobsRight from './assets/blobs-top-right.png';
 import './App.css';
@@ -24,6 +25,7 @@ function App() {
       <img src={blobsLeft} alt='' className='blobs-l' />
       <img src={blobsRight} alt='' className='blobs-r' />
       {!startQuiz && <StartPage startQuizClick={startQuizClick} />}
+      {startQuiz && <QuizPage />}
     </main>
   );
 }
