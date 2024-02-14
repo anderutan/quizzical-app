@@ -1,42 +1,98 @@
-#root {
-  max-width: 1280px;
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  color: #293264;
+  font-family: 'Roboto', sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+main,
+.start-quiz-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  height: 100vh;
+  width: 100vw;
   margin: 0 auto;
-  padding: 2rem;
+  background-color: #f5f7fb;
+  position: relative;
+}
+
+.blobs-r {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.blobs-l {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.start-quiz-div {
+  max-width: 500px;
   text-align: center;
+  gap: 30px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.start-quiz-div > h1 {
+  font-size: 3rem;
+  font-weight: bold;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.start-quiz-div > p {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.api-link {
+  text-decoration: none;
+  color: lightcoral;
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+button {
+  background-color: #4d5b9e;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding: 1em 3em;
+  margin-top: 1em;
+  border: none;
+  border-radius: 15px;
 }
